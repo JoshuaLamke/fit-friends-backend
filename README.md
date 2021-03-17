@@ -41,7 +41,7 @@
           }
           ```
   2. `POST /api/user/signup`
-    - [ ] Running on Heroku
+      - [ ] Running on Heroku
       - request:
         - HTTP header: 
           ```
