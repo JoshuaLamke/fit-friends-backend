@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-let db = require("../postressdb");
+let db = require("../db");
 const authenticate = (req, res, next) => {
     const token = req.header('Authorization').split(' ')[1];
     let decodedToken;
@@ -8,9 +8,9 @@ const authenticate = (req, res, next) => {
     } catch(err) {
         res.status(400).json({"Error": "Please Authenticate"})
     }
-    if(!decodedToken){return;}
-    const id = decodedToken.id;
-    db.query(`Select * FROM users WHERE id = ${id}`, (err, response) => {
+    if(!decodedToken){res.status(400).json({"Error": "Please Authenticate"})}
+    let p_id = decodedToken.p_id;
+    db.query(`SELECT * FROM person WHERE p_id = ${p_id}`, (err, response) => {
         if(!response.rows) {
             res.status(401).send({
                 "Error": "Cannot find user"
