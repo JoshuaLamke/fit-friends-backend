@@ -8,7 +8,7 @@
 ### End Points:
 
    1. `POST /api/user/login` 
-      **Use Case**: When you want to log in a user.
+      - **Use Case**: When you want to log in a user.
       - [x] Running on Heroku
       - request:
         - HTTP header: 
@@ -42,7 +42,7 @@
           }
           ```
   2. `POST /api/user/signup`
-      **Use Case**: When you want to sign up a user.
+      - **Use Case**: When you want to sign up a user.
       - [x] Running on Heroku
       - request:
         - HTTP header: 
@@ -77,7 +77,7 @@
           }
           ```
   3. `POST /api/user/info`
-      **Use Case**: When you want to fetch the user information for a certain day to fill in the user page.
+      - **Use Case**: When you want to fetch the user information for a certain day to fill in the user page.
       - [x] Running on Heroku
       - request:
         - HTTP header: 
