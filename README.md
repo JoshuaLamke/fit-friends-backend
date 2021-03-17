@@ -87,6 +87,7 @@
         - request body:
           ```
           date_: $DATE_:STRING
+          Authorization: Bearer ${token}
           ```
         **NOTE**: `date_` must be in the form yyyy-mm-dd
       - response (JSON)
