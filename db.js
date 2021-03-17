@@ -2,13 +2,24 @@
 const {Client} = require('pg');
 
 //Create client
-const client = new Client({
+let client;
+if(!process.env.DATABASE_URL) {
+  client = new Client({
     user: 'postgres',
     host: 'localhost',
     database: 'fit-friends',
     password: 'joshua',
     port: 5432,
   });
+}
+else {
+  client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
+  })
+}
 //Connect to client
 client.connect();
 
@@ -32,7 +43,7 @@ const CREATE_DAY_TABLE_SQL =`CREATE TABLE day (
   total_calories INT, 
   exercise TEXT,
   total_exercise INT,
-  date_ DATE,
+  date_ DATE NOT NULL,
   p_fk INT NOT NULL,
   CONSTRAINT person_fk FOREIGN KEY(p_fk) 
   REFERENCES person(p_id)
