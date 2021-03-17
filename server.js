@@ -149,7 +149,7 @@ app.post('/api/user/info', auth, (req, res) => {
 })
 //Update the users information for that day
 //Used for when you want to save the data that the user has inputted into the app
-app.put('/api/user/info', auth, (req, res) => {
+app.post('/api/user/info/update', auth, (req, res) => {
     
 })
 app.delete('/api/days', (req, res) => {
