@@ -20,10 +20,9 @@ let md5 = require('md5');
 //Require jsonwebtoken for authentication
 let jwt = require('jsonwebtoken');
 
-//Import body parser for post requests
-let bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
+//Allow the express ap to parse json and read urlencoded data
+app.use(express.json());
+app.use(express.urlencoded());
 
 //Start server
 app.listen(process.env.PORT, () => {
@@ -93,7 +92,6 @@ app.post("/api/user/signup", (req, res) => {
         }
         let sql = `INSERT INTO person (name, email, password) VALUES ($1, $2, $3) RETURNING p_id`;
         let params = [data.name, data.email, data.password];
-        console.log(params)
         db.query(sql, params, function(err, result) {
             if(err) {
                 res.status(400).json({
