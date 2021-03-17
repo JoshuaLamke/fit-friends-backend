@@ -11,7 +11,7 @@ const authenticate = (req, res, next) => {
     if(!decodedToken){res.status(400).json({"Error": "Please Authenticate"})}
     let p_id = decodedToken.p_id;
     db.query(`SELECT * FROM person WHERE p_id = ${p_id}`, (err, response) => {
-        if(!response.rows) {
+        if(!response.rows[0]) {
             res.status(401).send({
                 "Error": "Cannot find user"
             });
