@@ -4,6 +4,8 @@
 ### Assumptions
 - JWT is expected to be in the Authorization HTTP header using the Bearer schema:
      `Authorization: Bearer ${token}`
+- URL for the application is https://fit-friends.herokuapp.com/
+     **Prefix ALL enpoints with this url**
 
 ### End Points:
 
