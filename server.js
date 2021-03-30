@@ -23,7 +23,7 @@ let jwt = require('jsonwebtoken');
 //Require authentication middleware
 let auth = require('./middleware/auth');
 
-//Allow the express ap to parse json and read urlencoded data
+//Allow the express app to parse json and read urlencoded data
 app.use(express.json());
 app.use(express.urlencoded());
 
