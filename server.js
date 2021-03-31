@@ -129,8 +129,6 @@ app.post('/api/user/info', auth, async (req, res) => {
     let query = `SELECT * FROM day WHERE p_fk = $1 AND date_ = $2`;
     let json = {
         d_id: null,
-        total_calories: null,
-        total_exercise: null,
         date_: null,
         p_fk: null,
         calories: [],
