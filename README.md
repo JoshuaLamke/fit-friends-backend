@@ -40,7 +40,7 @@
         - FAILED (http status code: `4XX`)
           ```
           {
-          "message": $ERROR_MESSAGE
+               "error": $ERROR_MESSAGE
           }
           ```
   2. `POST /api/user/signup`
@@ -75,7 +75,7 @@
         - FAILED (http status code: `4XX`)
           ```
           {
-          "message": $ERROR_MESSAGE
+               "error": $ERROR_MESSAGE
           }
           ```
   3. `POST /api/user/info`
@@ -89,18 +89,16 @@
           ``` 
         - request body:
           ```
-          date_: $DATE_:STRING
+          date: $DATE_:STRING
           ```
-        **NOTE**: `date_` must be in the form yyyy-mm-dd
+        **NOTE**: `date` must be in the form yyyy-mm-dd
       - response (JSON)
         - SUCCESS (http status code: `200`)
           ```
           {
               "d_id": xx,
-              "calories": xxx,
-              "total_calories": xxx,
-              "exercise": xxx,
-              "total_exercise": xxx,
+              "calories": [{},...],
+              "exercise": [{},...],
               "date_": "xxxxx",
               "p_fk": xx
           }
@@ -108,6 +106,61 @@
         - FAILED (http status code: `4XX`)
           ```
           {
-          "message": $ERROR_MESSAGE
+               "error": $ERROR_MESSAGE
+          }
+          ```
+  4. `POST /api/user/info/addCalories`
+     ## **Use Case**: When you want to add calories for a specific day
+     - [x] Running on Heroku
+     - request:
+          - HTTP header:
+            ```
+            "Content-Type": "application/json"
+            "Authorization": "Bearer ${token}"
+            ```
+          - request body:
+            ```
+            date: $DATE_:STRING
+            ```
+          **NOTE**: `date` must be in the form yyyy-mm-dd
+      - response (JSON)
+        - SUCCESS (http status code: `200`)
+          ```
+          {
+              "Success": "calorie data successfully added"
+          }
+          ```
+        - FAILED (http status code: `4XX`)
+          ```
+          {
+               "error": $ERROR_MESSAGE
+          }
+          ```
+          
+  5. `POST /api/user/info/addExercises`
+     ## **Use Case**: When you want to add calories for a specific day
+     - [x] Running on Heroku
+     - request:
+          - HTTP header:
+            ```
+            "Content-Type": "application/json"
+            "Authorization": "Bearer ${token}"
+            ```
+          - request body:
+            ```
+            date: $DATE_:STRING
+            ```
+          **NOTE**: `date` must be in the form yyyy-mm-dd
+      - response (JSON)
+        - SUCCESS (http status code: `200`)
+          ```
+          {
+              "Success": "exercise data successfully added"
+          }
+          ```
+        - FAILED (http status code: `4XX`)
+          ```
+          {
+               "error": $ERROR_MESSAGE
           }
           ```
