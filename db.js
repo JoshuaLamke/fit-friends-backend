@@ -39,8 +39,6 @@ client.query(CREATE_PERSON_TABLE_SQL, (err, res) => {
   });
 const CREATE_DAY_TABLE_SQL =`CREATE TABLE day (
   d_id SERIAL PRIMARY KEY,
-  total_calories INT, 
-  total_exercise INT,
   date_ DATE NOT NULL,
   p_fk INT NOT NULL,
   CONSTRAINT person_fk FOREIGN KEY(p_fk) 
@@ -56,7 +54,7 @@ client.query(CREATE_DAY_TABLE_SQL, (err, res) => {
 });
 const CREATE_CALORIES_TABLE_SQL = `CREATE TABLE calories (
   c_id SERIAL PRIMARY KEY,
-  amount int NOT NULL,
+  amount INT NOT NULL,
   description TEXT,
   d_id INT NOT NULL,
   CONSTRAINT day_calorie_fk FOREIGN KEY(d_id)
@@ -65,7 +63,6 @@ const CREATE_CALORIES_TABLE_SQL = `CREATE TABLE calories (
 );`
 client.query(CREATE_CALORIES_TABLE_SQL, (err, res) => {
   if(err) {
-    console.log(err)
   }
   else {
     console.log('Calories table successfully created.')
@@ -73,7 +70,7 @@ client.query(CREATE_CALORIES_TABLE_SQL, (err, res) => {
 });
 const CREATE_EXERCISES_TABLE_SQL = `CREATE TABLE exercises (
   e_id SERIAL PRIMARY KEY,
-  amount int NOT NULL,
+  amount DECIMAL NOT NULL,
   description TEXT,
   d_id INT NOT NULL,
   CONSTRAINT day_calorie_fk FOREIGN KEY(d_id)
