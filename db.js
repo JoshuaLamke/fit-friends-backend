@@ -57,6 +57,7 @@ const CREATE_CALORIES_TABLE_SQL = `CREATE TABLE calories (
   amount INT NOT NULL,
   description TEXT,
   d_id INT NOT NULL,
+  type TEXT NOT NULL,
   CONSTRAINT day_calorie_fk FOREIGN KEY(d_id)
   REFERENCES day(d_id)
   ON DELETE CASCADE
@@ -73,6 +74,8 @@ const CREATE_EXERCISES_TABLE_SQL = `CREATE TABLE exercises (
   amount DECIMAL NOT NULL,
   description TEXT,
   d_id INT NOT NULL,
+  sets INT,
+  reps INT,
   CONSTRAINT day_calorie_fk FOREIGN KEY(d_id)
   REFERENCES day(d_id)
   ON DELETE CASCADE

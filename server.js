@@ -186,6 +186,9 @@ app.post('/api/user/info/addCalories', auth, async (req, res) => {
     if(!req.body.amount) {
         errors.push("Need to specify an amount");
     }
+    if(!req.body.type) {
+        errors.push("Need to specify type. eg. breakfast, lunch, etc")
+    }
     if(errors.length !== 0) {
         res.status(400).send(errors);
         return;
@@ -193,13 +196,13 @@ app.post('/api/user/info/addCalories', auth, async (req, res) => {
     let calorieData;
     try{
         let result = await db.query('SELECT d_id FROM day WHERE date_ = $1 AND p_fk = $2',[req.body.date, req.user.p_id]);
-        calorieData = [result.rows[0].d_id,req.body.amount,req.body.description ? req.body.description : null];
+        calorieData = [result.rows[0].d_id,req.body.amount,req.body.description ? req.body.description : null, req.body.type];
     } catch(e) {
         res.status(400).send({"error": "something went wrong when searching for the correct day from the date given"});
         return;
     }
     try{
-        await db.query('INSERT INTO calories (d_id,amount,description) VALUES($1, $2, $3)',calorieData);
+        await db.query('INSERT INTO calories (d_id,amount,description,type) VALUES($1, $2, $3, $4)',calorieData);
         res.status(200).send({"Success": "calorie data successfully added"});
     } catch(e) {
         res.status(400).send({"error": "could not add calorie data"});
@@ -222,13 +225,13 @@ app.post('/api/user/info/addExercises', auth, async (req, res) => {
     let exerciseData;
     try{
         let result = await db.query('SELECT d_id FROM day WHERE date_ = $1 AND p_fk = $2',[req.body.date, req.user.p_id]);
-        exerciseData = [result.rows[0].d_id,req.body.amount,req.body.description ? req.body.description : null];
+        exerciseData = [result.rows[0].d_id,req.body.amount,req.body.description ? req.body.description : null,req.body.sets ? req.body.sets : null,req.body.reps ? req.body.reps : null];
     } catch(e) {
         res.status(400).send({"error": "something went wrong when searching for the correct day from the date given"});
         return;
     }
     try{
-        await db.query('INSERT INTO exercises (d_id,amount,description) VALUES($1, $2, $3)',exerciseData);
+        await db.query('INSERT INTO exercises (d_id,amount,description,sets,reps) VALUES($1, $2, $3, $4, $5)',exerciseData);
         res.status(200).send({"Success": "exercise data successfully added"});
     } catch(e) {
         res.status(400).send({"error": "could not add exercise data"});
