@@ -39,10 +39,6 @@ client.query(CREATE_PERSON_TABLE_SQL, (err, res) => {
   });
 const CREATE_DAY_TABLE_SQL =`CREATE TABLE day (
   d_id SERIAL PRIMARY KEY,
-  calories TEXT,
-  total_calories INT, 
-  exercise TEXT,
-  total_exercise INT,
   date_ DATE NOT NULL,
   p_fk INT NOT NULL,
   CONSTRAINT person_fk FOREIGN KEY(p_fk) 
@@ -54,6 +50,41 @@ client.query(CREATE_DAY_TABLE_SQL, (err, res) => {
   }
   else {
     console.log('Day table successfully created.')
+  }
+});
+const CREATE_CALORIES_TABLE_SQL = `CREATE TABLE calories (
+  c_id SERIAL PRIMARY KEY,
+  amount INT NOT NULL,
+  description TEXT,
+  d_id INT NOT NULL,
+  type TEXT NOT NULL,
+  CONSTRAINT day_calorie_fk FOREIGN KEY(d_id)
+  REFERENCES day(d_id)
+  ON DELETE CASCADE
+);`
+client.query(CREATE_CALORIES_TABLE_SQL, (err, res) => {
+  if(err) {
+  }
+  else {
+    console.log('Calories table successfully created.')
+  }
+});
+const CREATE_EXERCISES_TABLE_SQL = `CREATE TABLE exercises (
+  e_id SERIAL PRIMARY KEY,
+  amount DECIMAL NOT NULL,
+  description TEXT,
+  d_id INT NOT NULL,
+  sets INT,
+  reps INT,
+  CONSTRAINT day_calorie_fk FOREIGN KEY(d_id)
+  REFERENCES day(d_id)
+  ON DELETE CASCADE
+);`
+client.query(CREATE_EXERCISES_TABLE_SQL, (err, res) => {
+  if(err) {
+  }
+  else {
+    console.log('Exercises table successfully created.')
   }
 });
 module.exports = client;
