@@ -125,8 +125,8 @@
             description: STRING,
             type: STRING
             ```
-          ## **NOTE**: `date` must be in the form yyyy-mm-dd
-          ## **OPTIONAL ARGUMENTS**: `description`
+          #### **NOTE**: `date` must be in the form yyyy-mm-dd
+          #### **OPTIONAL ARGUMENTS**: `description`
       - response (JSON)
         - SUCCESS (http status code: `200`)
           ```
@@ -158,8 +158,8 @@
             sets: INTEGER,
             reps: INTEGER
             ```
-          ## **NOTE**: `date` must be in the form yyyy-mm-dd
-          ## **OPTIONAL ARGUMENTS**: `description`, `sets`, `reps`
+          #### **NOTE**: `date` must be in the form yyyy-mm-dd
+          #### **OPTIONAL ARGUMENTS**: `description`, `sets`, `reps`
       - response (JSON)
         - SUCCESS (http status code: `200`)
           ```
