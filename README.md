@@ -19,8 +19,8 @@
           ``` 
         - request body:
           ```
-          email: $EMAIL:STRING
-          password: $PASSWORD:STRING
+          email: STRING
+          password: STRING
           ```
         **NOTE**: `email` must be unique
       - response (JSON)
@@ -53,9 +53,9 @@
           ``` 
         - request body:
           ```
-          name: $NAME:STRING 
-          email: $EMAIL:STRING
-          password: $PASSWORD:STRING
+          name: STRING 
+          email: STRING
+          password: STRING
           ```
         **NOTE**: `email` must be unique
       - response (JSON)
@@ -89,7 +89,7 @@
           ``` 
         - request body:
           ```
-          date: $DATE_:STRING
+          date: STRING
           ```
         **NOTE**: `date` must be in the form yyyy-mm-dd
       - response (JSON)
@@ -120,9 +120,13 @@
             ```
           - request body:
             ```
-            date: $DATE_:STRING
+            date: STRING,
+            amount: INTEGER,
+            description: STRING,
+            type: STRING
             ```
           **NOTE**: `date` must be in the form yyyy-mm-dd
+          **OPTIONAL ARGUMENTS**: `description`
       - response (JSON)
         - SUCCESS (http status code: `200`)
           ```
@@ -148,9 +152,14 @@
             ```
           - request body:
             ```
-            date: $DATE_:STRING
+            date: STRING,
+            amount: DECIMAL,
+            description: STRING,
+            sets: INTEGER,
+            reps: INTEGER
             ```
           **NOTE**: `date` must be in the form yyyy-mm-dd
+          **OPTIONAL ARGUMENTS**: `description`, `sets`, `reps`
       - response (JSON)
         - SUCCESS (http status code: `200`)
           ```
