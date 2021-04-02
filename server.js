@@ -62,7 +62,7 @@ app.post("/api/user/login", (req, res) => {
                     "data": row,
                     "Token": token
                 };
-                res.status(200).send(userInfo);
+                res.status(201).send(userInfo);
             }
         }
     })
@@ -107,7 +107,7 @@ app.post("/api/user/signup", (req, res) => {
             }
             else{
                 const token = jwt.sign({id: result.rows[0].p_id}, process.env.SECRET);
-                res.json({
+                res.status(201).json({
                     "message": "success",
                     "data": data,
                     "token": token
