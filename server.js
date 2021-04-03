@@ -99,14 +99,15 @@ app.post("/api/user/signup", (req, res) => {
         let sql = `INSERT INTO person (name, email, password) VALUES ($1, $2, $3) RETURNING p_id`;
         let params = [data.name, data.email, data.password];
         //Query database and insert a new person into it
-        db.query(sql, params, (err, result) => {
+        db.query(sql, params, (err, response) => {
             if(err) {
                 res.status(400).json({
                     "error": err
                 });
             }
             else{
-                const token = jwt.sign({id: result.rows[0].p_id}, process.env.SECRET);
+                let row = response.rows[0];
+                const token = jwt.sign({p_id: row.p_id}, process.env.SECRET);
                 res.status(201).json({
                     "message": "success",
                     "data": data,
@@ -237,6 +238,59 @@ app.post('/api/user/info/addExercises', auth, async (req, res) => {
         res.status(400).send({"error": "could not add exercise data"});
     }
 })
+
+// Endpoint for deleting calories
+// Use when a user wants to remove something they ate
+app.delete('/api/calories', auth, async (req, res) => {
+    if(!req.body.c_id) {
+        res.status(400).send({"Error": "Need to specify the c_id (calorie id) that you want to delete."});
+        return;
+    }
+    try{
+        let response = await db.query("DELETE FROM calories WHERE c_id = $1", [req.body.c_id]);
+        if(response.rowCount === 0) {
+           throw new Exception(); 
+        }
+        res.status(200).send({"Success": `Calorie with c_id '${req.body.c_id}' deleted`});
+    } catch(e) {
+        res.status(400).send({"Error":"Could not delete calorie with c_id '" + req.body.c_id + "'"});
+    }
+
+});
+
+// Endpoint for deleting exercises
+// Use when a user wants to remove an exercise
+app.delete('/api/exercises', auth, async (req, res) => {
+    if(!req.body.e_id) {
+        res.status(400).send({"Error": "Need to specify the e_id (exercise id) that you want to delete."});
+        return;
+    }
+    try{
+        let response = await db.query("DELETE FROM exercises WHERE e_id = $1", [req.body.e_id]);
+        if(response.rowCount === 0) {
+           throw new Exception(); 
+        }
+        res.status(200).send({"Success": `Exercise with e_id '${req.body.e_id}' deleted`});
+    } catch(e) {
+        res.status(400).send({"Error":"Could not delete exercise with e_id '" + req.body.e_id + "'"});
+    }
+});
+
+// Endpoint to delete an account
+// Use when the user wants to delete their account
+app.delete('/api/user', auth, async (req, res) => {
+    let p_id = req.user.p_id;
+    try {
+        let response = await db.query('DELETE FROM person WHERE p_id = $1',[p_id]);
+        if(response.rowCount === 0) {
+            throw new Exception();
+        }
+        res.status(200).send({"Success": "User successfully deleted"});
+    } catch (error) {
+        res.status(400).send({"Error": "Could not delete user"});
+    }
+})
+
 app.delete('/api/days', (req, res) => {
     db.query('DELETE FROM day', (err, result) => {
         if(err) {
