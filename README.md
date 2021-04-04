@@ -173,3 +173,84 @@
                "error": $ERROR_MESSAGE
           }
           ```
+     6. `DELETE /api/calories`
+       ## **Use Case**: When you want to delete a food a specific day
+       - [x] Running on Heroku
+       - request:
+          - HTTP header:
+            ```
+            "Content-Type": "application/json"
+            "Authorization": "Bearer ${token}"
+            ```
+          - request body:
+            ```
+            c_id: INTEGER
+            ```
+          #### **NOTE**: c_id is the id of the specific food you want to delete
+      - response (JSON)
+        - SUCCESS (http status code: `200`)
+          ```
+          {
+              "Success": `Calorie with c_id '${c_id}' deleted`
+          }
+          ```
+        - FAILED (http status code: `4XX`)
+          ```
+          {
+               "error": $ERROR_MESSAGE
+          }
+          ```
+     7. `DELETE /api/exercises`
+       ## **Use Case**: When you want to delete a food a specific day
+       - [x] Running on Heroku
+       - request:
+          - HTTP header:
+            ```
+            "Content-Type": "application/json"
+            "Authorization": "Bearer ${token}"
+            ```
+          - request body:
+            ```
+            e_id: INTEGER
+            ```
+          #### **NOTE**: e_id is the id of the specific exercise you want to delete
+      - response (JSON)
+        - SUCCESS (http status code: `200`)
+          ```
+          {
+              "Success": `Exercise with e_id '${e_id}' deleted`
+          }
+          ```
+        - FAILED (http status code: `4XX`)
+          ```
+          {
+               "error": $ERROR_MESSAGE
+          }
+          ```
+     8. `DELETE /api/user`
+        ## **Use Case**: When you want to delete a food a specific day
+       - [x] Running on Heroku
+       - request:
+          - HTTP header:
+            ```
+            "Content-Type": "application/json"
+            "Authorization": "Bearer ${token}"
+            ```
+          - request body:
+            ```
+            N/A: NO BODY NEEDED, ONLY AUTH TOKEN.
+            ```
+          #### **NOTE**: Do not put any body on the request, just use the auth token
+      - response (JSON)
+        - SUCCESS (http status code: `200`)
+          ```
+          {
+              "Success": "User successfully deleted"
+          }
+          ```
+        - FAILED (http status code: `4XX`)
+          ```
+          {
+               "error": $ERROR_MESSAGE
+          }
+          ```
