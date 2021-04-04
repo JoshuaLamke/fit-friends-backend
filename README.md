@@ -173,7 +173,7 @@
                "error": $ERROR_MESSAGE
           }
           ```
-     6. `DELETE /api/calories`
+  6. `DELETE /api/calories`
        ## **Use Case**: When you want to delete a food a specific day
        - [x] Running on Heroku
        - request:
@@ -200,7 +200,7 @@
                "error": $ERROR_MESSAGE
           }
           ```
-     7. `DELETE /api/exercises`
+  7. `DELETE /api/exercises`
        ## **Use Case**: When you want to delete a food a specific day
        - [x] Running on Heroku
        - request:
@@ -227,8 +227,8 @@
                "error": $ERROR_MESSAGE
           }
           ```
-     8. `DELETE /api/user`
-        ## **Use Case**: When you want to delete a food a specific day
+  8. `DELETE /api/user`
+      ## **Use Case**: When you want to delete a food a specific day
        - [x] Running on Heroku
        - request:
           - HTTP header:
