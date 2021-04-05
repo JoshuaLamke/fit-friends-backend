@@ -94,7 +94,8 @@ app.post("/api/user/signup", (req, res) => {
         let data = {
             name: req.body.name,
             email: req.body.email,
-            password: md5(req.body.password)
+            password: md5(req.body.password),
+            role_model: 'none'
         };
         let sql = `INSERT INTO person (name, email, password) VALUES ($1, $2, $3) RETURNING p_id`;
         let params = [data.name, data.email, data.password];
@@ -237,6 +238,25 @@ app.post('/api/user/info/addExercises', auth, async (req, res) => {
     } catch(e) {
         res.status(400).send({"error": "could not add exercise data"});
     }
+})
+
+// Endpoint to set a role model
+// Use when the user wants to set a role model
+app.post('/api/roleModel', auth, async (req, res) => {
+    if(!req.body.role_model) {
+        res.status(400).send({"Error":"Need to specify a role model"});
+        return;
+    }
+    try{
+        let response = await db.query('UPDATE person SET role_model = $1 WHERE p_id = $2', [req.body.role_model, req.user.p_id]);
+        if(response.rowCount === 0) {
+            throw new Exception();
+        }
+        res.status(200).send({"Success": `Role model updated to '${req.body.role_model}'`});
+    } catch(e) {
+        res.status(400).send({"Error": `Could not update role model for person with p_id '${req.user.p_id}'`});
+    }
+    
 })
 
 // Endpoint for deleting calories

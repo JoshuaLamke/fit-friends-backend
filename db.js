@@ -27,7 +27,8 @@ const CREATE_PERSON_TABLE_SQL =`CREATE TABLE person (
   p_id SERIAL PRIMARY KEY,
   name TEXT NOT NULL, 
   email TEXT UNIQUE NOT NULL, 
-  password TEXT NOT NULL
+  password TEXT NOT NULL,
+  role_model TEXT NOT NULL DEFAULT 'none'
   );`
 //Query the db to see if connection was successful
 client.query(CREATE_PERSON_TABLE_SQL, (err, res) => {
