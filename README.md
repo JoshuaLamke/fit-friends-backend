@@ -254,3 +254,29 @@
                "error": $ERROR_MESSAGE
           }
           ```
+  9. `POST /api/roleModel`
+      ## **Use Case**: When you want to update the role model of a user
+       - [x] Running on Heroku
+       - request:
+          - HTTP header:
+            ```
+            "Content-Type": "application/json"
+            "Authorization": "Bearer ${token}"
+            ```
+          - request body:
+            ```
+            role_model: STRING
+            ```
+      - response (JSON)
+        - SUCCESS (http status code: `200`)
+          ```
+          {
+              "Success": `Role model updated to '${role_model}'`}
+          }
+          ```
+        - FAILED (http status code: `4XX`)
+          ```
+          {
+               "error": $ERROR_MESSAGE
+          }
+          ```
