@@ -98,7 +98,7 @@
           {
               "d_id": xx,
               "calories": [{},...],
-              "exercise": [{},...],
+              "exercises": [{},...],
               "date_": "xxxxx",
               "p_fk": xx
           }
