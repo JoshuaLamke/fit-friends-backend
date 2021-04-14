@@ -204,8 +204,8 @@ app.post('/api/user/info/addCalories', auth, async (req, res) => {
         return;
     }
     try{
-        await db.query('INSERT INTO calories (d_id,amount,description,type) VALUES($1, $2, $3, $4)',calorieData);
-        res.status(200).send({"Success": "calorie data successfully added"});
+        let response = await db.query('INSERT INTO calories (d_id,amount,description,type) VALUES($1, $2, $3, $4) RETURNING c_id',calorieData);
+        res.status(200).send({"Success": "calorie data successfully","c_id": response.rows[0].c_id});
     } catch(e) {
         res.status(400).send({"error": "could not add calorie data"});
     }
@@ -233,8 +233,8 @@ app.post('/api/user/info/addExercises', auth, async (req, res) => {
         return;
     }
     try{
-        await db.query('INSERT INTO exercises (d_id,amount,description,sets,reps) VALUES($1, $2, $3, $4, $5)',exerciseData);
-        res.status(200).send({"Success": "exercise data successfully added"});
+        let response = await db.query('INSERT INTO exercises (d_id,amount,description,sets,reps) VALUES($1, $2, $3, $4, $5) RETURNING e_id',exerciseData);
+        res.status(200).send({"Success": "exercise data successfully added","e_id": response.rows[0].e_id});
     } catch(e) {
         res.status(400).send({"error": "could not add exercise data"});
     }
