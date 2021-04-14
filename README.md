@@ -131,7 +131,8 @@
         - SUCCESS (http status code: `200`)
           ```
           {
-              "Success": "calorie data successfully added"
+              "Success": "calorie data successfully added",
+              "c_id": x
           }
           ```
         - FAILED (http status code: `4XX`)
@@ -164,7 +165,8 @@
         - SUCCESS (http status code: `200`)
           ```
           {
-              "Success": "exercise data successfully added"
+              "Success": "exercise data successfully added",
+              "e_id": x
           }
           ```
         - FAILED (http status code: `4XX`)
