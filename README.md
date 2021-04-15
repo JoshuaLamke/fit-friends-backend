@@ -369,7 +369,7 @@
                "error": $ERROR_MESSAGE
           }
           ```
- 13. `POST /api/user/update/height`
+ 13. `POST /api/user/info/update/caloriegoal`
       ## **Use Case**: When you want to update the calorie goal of a certain day
        - [x] Running on Heroku
        - request:
@@ -383,6 +383,7 @@
             date: yyyy-mm-dd,
             calorie_goal: INTEGER
             ```
+        **NOTE: dates must be in the form yyyy-mm-dd**
       - response (JSON)
         - SUCCESS (http status code: `200`)
           ```
