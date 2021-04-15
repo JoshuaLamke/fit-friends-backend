@@ -165,6 +165,33 @@ app.post('/api/user/update/weight', auth, async (req, res) => {
     }
 })
 
+//Update the user's calorie goal for a date.
+app.post('/api/user/info/update/caloriegoal', auth, async (req, res) => {
+    if(!req.body.date) {
+        res.status(400).send({"Error": "Must specify date for the calorie goal change."})
+        return;
+    }
+    if(!req.body.calorie_goal) {
+        res.status(200).send({"Error": "Must specify a calorie goal for the calorie goal change."});
+        return;
+    }
+    else{
+        try{
+            let response = await db.query(`UPDATE day SET calorie_goal = $1 WHERE p_fk = $2 AND date_ = $3`, [req.body.calorie_goal,req.user.p_id, req.body.date]);
+            if(response.rowCount > 0) {
+                res.status(200).send({"Success": "Calorie goal successfully updated."});
+                return;
+            }
+            else{
+                throw new Exception();
+            }
+        } catch(e) {
+            res.status(400).send({"Error": "Something went wrong with updating the calorie goal"});
+            return;
+        }
+    }
+})
+
 //Update the user's gender.
 app.post('/api/user/update/gender', auth, async (req, res) => {
     if(!req.body.gender) {
