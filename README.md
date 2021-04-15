@@ -33,7 +33,10 @@
                 "name": "xxxxxxx",
                 "email": "xxxxxxxxxxxxx",
                 "password": "TheHashedPassword",
-                "role model": x
+                "height": "x",
+                "weight": "x",
+                "gender": "x",
+                "role model": "x"
             },
             "Token": "TheAuthenticationToken"
           }
@@ -68,7 +71,11 @@
                 "p_id": x,
                 "name": "xxxxxxx",
                 "email": "xxxxxxxxxxxxx",
-                "password": "TheHashedPassword"
+                "password": "TheHashedPassword",
+                "height": "x",
+                "weight": "x",
+                "gender": "x",
+                "role model": "x"
             },
             "Token": "TheAuthenticationToken"
           }
@@ -101,6 +108,7 @@
               "calories": [{},...],
               "exercises": [{},...],
               "date_": "xxxxx",
+              "calorie_goal": x,
               "p_fk": xx
           }
           ```
@@ -275,6 +283,111 @@
           ```
           {
               "Success": `Role model updated to '${role_model}'`}
+          }
+          ```
+        - FAILED (http status code: `4XX`)
+          ```
+          {
+               "error": $ERROR_MESSAGE
+          }
+          ```
+ 10. `POST /api/user/update/height`
+      ## **Use Case**: When you want to update the height of the user
+       - [x] Running on Heroku
+       - request:
+          - HTTP header:
+            ```
+            "Content-Type": "application/json"
+            "Authorization": "Bearer ${token}"
+            ```
+          - request body:
+            ```
+            height: STRING
+            ```
+      - response (JSON)
+        - SUCCESS (http status code: `200`)
+          ```
+          {
+              "Success": `$SUCCESS_MESSAGE`}
+          }
+          ```
+        - FAILED (http status code: `4XX`)
+          ```
+          {
+               "error": $ERROR_MESSAGE
+          }
+          ```
+ 11. `POST /api/user/update/weight`
+      ## **Use Case**: When you want to update the weight of the user
+       - [x] Running on Heroku
+       - request:
+          - HTTP header:
+            ```
+            "Content-Type": "application/json"
+            "Authorization": "Bearer ${token}"
+            ```
+          - request body:
+            ```
+            weight: STRING
+            ```
+      - response (JSON)
+        - SUCCESS (http status code: `200`)
+          ```
+          {
+              "Success": `$SUCCESS_MESSAGE`}
+          }
+          ```
+        - FAILED (http status code: `4XX`)
+          ```
+          {
+               "error": $ERROR_MESSAGE
+          }
+          ```
+ 12. `POST /api/user/update/gender`
+      ## **Use Case**: When you want to update the gender of the user
+       - [x] Running on Heroku
+       - request:
+          - HTTP header:
+            ```
+            "Content-Type": "application/json"
+            "Authorization": "Bearer ${token}"
+            ```
+          - request body:
+            ```
+            gender: STRING
+            ```
+      - response (JSON)
+        - SUCCESS (http status code: `200`)
+          ```
+          {
+              "Success": `$SUCCESS_MESSAGE`}
+          }
+          ```
+        - FAILED (http status code: `4XX`)
+          ```
+          {
+               "error": $ERROR_MESSAGE
+          }
+          ```
+ 13. `POST /api/user/update/height`
+      ## **Use Case**: When you want to update the calorie goal of a certain day
+       - [x] Running on Heroku
+       - request:
+          - HTTP header:
+            ```
+            "Content-Type": "application/json"
+            "Authorization": "Bearer ${token}"
+            ```
+          - request body:
+            ```
+            date: yyyy-mm-dd,
+            calorie_goal: INTEGER
+            ```
+      - response (JSON)
+        - SUCCESS (http status code: `200`)
+          ```
+          {
+              "Success": `Calorie goal successfully updated.`}
           }
           ```
         - FAILED (http status code: `4XX`)
