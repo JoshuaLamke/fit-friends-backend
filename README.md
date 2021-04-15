@@ -204,7 +204,7 @@
           }
           ```
   7. `DELETE /api/exercises`
-       ## **Use Case**: When you want to delete a food a specific day
+       ## **Use Case**: When you want to delete an exercise a specific day
        - [x] Running on Heroku
        - request:
           - HTTP header:
@@ -231,7 +231,7 @@
           }
           ```
   8. `DELETE /api/user`
-      ## **Use Case**: When you want to delete a food a specific day
+      ## **Use Case**: When you want to delete a user
        - [x] Running on Heroku
        - request:
           - HTTP header:
