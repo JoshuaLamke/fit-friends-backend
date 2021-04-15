@@ -97,7 +97,7 @@ app.post("/api/user/signup", (req, res) => {
             password: md5(req.body.password),
             role_model: 'none'
         };
-        let sql = `INSERT INTO person (name, email, password) VALUES ($1, $2, $3) RETURNING p_id`;
+        let sql = `INSERT INTO person (name, email, password) VALUES ($1, $2, $3) RETURNING *`;
         let params = [data.name, data.email, data.password];
         //Query database and insert a new person into it
         db.query(sql, params, (err, response) => {
@@ -111,11 +111,80 @@ app.post("/api/user/signup", (req, res) => {
                 const token = jwt.sign({p_id: row.p_id}, process.env.SECRET);
                 res.status(201).json({
                     "message": "success",
-                    "data": data,
+                    "data": row,
                     "token": token
                 });
             }
         });
+    }
+})
+
+//Update the user's height.
+app.post('/api/user/update/height', auth, async (req, res) => {
+    if(!req.body.height) {
+        res.status(200).send({"Success": "Endpoint successfully reached but no update occurred as height was empty"});
+        return;
+    }
+    else{
+        try{
+            let response = await db.query(`UPDATE person SET height = $1 WHERE p_id = $2`, [req.body.height,req.user.p_id]);
+            if(response.rowCount > 0) {
+                res.status(200).send({"Success": "Height successfully updated."});
+                return;
+            }
+            else{
+                throw new Exception();
+            }
+        } catch(e) {
+            res.status(400).send({"Error": "Something went wrong with updating height"});
+            return;
+        }
+    }
+})
+
+//Update the user's weight.
+app.post('/api/user/update/weight', auth, async (req, res) => {
+    if(!req.body.weight) {
+        res.status(200).send({"Success": "Endpoint successfully reached but no update occurred as weight was empty"});
+        return;
+    }
+    else{
+        try{
+            let response = await db.query(`UPDATE person SET weight = $1 WHERE p_id = $2`, [req.body.weight,req.user.p_id]);
+            if(response.rowCount > 0) {
+                res.status(200).send({"Success": "Weight successfully updated."});
+                return;
+            }
+            else{
+                throw new Exception();
+            }
+        } catch(e) {
+            res.status(400).send({"Error": "Something went wrong with updating weight"});
+            return;
+        }
+    }
+})
+
+//Update the user's gender.
+app.post('/api/user/update/gender', auth, async (req, res) => {
+    if(!req.body.gender) {
+        res.status(200).send({"Success": "Endpoint successfully reached but no update occurred as gender was empty"});
+        return;
+    }
+    else{
+        try{
+            let response = await db.query(`UPDATE person SET gender = $1 WHERE p_id = $2`, [req.body.gender,req.user.p_id]);
+            if(response.rowCount > 0) {
+                res.status(200).send({"Success": "Gender successfully updated."});
+                return;
+            }
+            else{
+                throw new Exception();
+            }
+        } catch(e) {
+            res.status(400).send({"Error": "Something went wrong with updating gender"});
+            return;
+        }
     }
 })
 
@@ -133,6 +202,7 @@ app.post('/api/user/info', auth, async (req, res) => {
         d_id: null,
         date_: null,
         p_fk: null,
+        calorie_goal: null,
         calories: [],
         exercises: []
     }
