@@ -32,7 +32,8 @@
                 "p_id": x,
                 "name": "xxxxxxx",
                 "email": "xxxxxxxxxxxxx",
-                "password": "TheHashedPassword"
+                "password": "TheHashedPassword",
+                "role model": x
             },
             "Token": "TheAuthenticationToken"
           }
