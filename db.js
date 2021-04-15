@@ -28,6 +28,9 @@ const CREATE_PERSON_TABLE_SQL =`CREATE TABLE person (
   name TEXT NOT NULL, 
   email TEXT UNIQUE NOT NULL, 
   password TEXT NOT NULL,
+  height TEXT DEFAULT '',
+  weight TEXT DEFAULT '',
+  gender TEXT DEFAULT '',
   role_model TEXT NOT NULL DEFAULT 'none'
   );`
 //Query the db to see if connection was successful
@@ -41,6 +44,7 @@ client.query(CREATE_PERSON_TABLE_SQL, (err, res) => {
 const CREATE_DAY_TABLE_SQL =`CREATE TABLE day (
   d_id SERIAL PRIMARY KEY,
   date_ DATE NOT NULL,
+  calorie_goal INT DEFAULT 2000,
   p_fk INT NOT NULL,
   CONSTRAINT person_fk FOREIGN KEY(p_fk) 
   REFERENCES person(p_id)
